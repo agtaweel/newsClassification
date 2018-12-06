@@ -6,7 +6,7 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.svm import SVC
-from sklearn.metrics import accuracy_score, f1_score
+from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import Imputer
 from sklearn.metrics import confusion_matrix
 from sklearn.naive_bayes import GaussianNB
@@ -83,7 +83,6 @@ def get_results(classifier, x_test, y_test):
     # Predicting the Test set results
     predictions = classifier.predict(x_test)
     accuracy = accuracy_score(y_test, predictions)
-    # score = f1_score(y_test,predictions)
     cm = confusion_matrix(y_test, predictions)
     print('testing results: ')
     return accuracy, cm
@@ -91,17 +90,7 @@ def get_results(classifier, x_test, y_test):
 
 if __name__ == "__main__":
     x_train, x_test, y_train, y_test = read_data('train.csv')
-    # print(x_train)
-    # print(y_train)
     classifier = train_data(x_train, y_train)
     accuracy, cm = get_results(classifier, x_test, y_test)
-    # print('score = ', score*100, '%')
     print('accuracy = ', accuracy*100, '%')
     print('Confusion matrix = ', cm)
-    # predictions = classifier.predict(x_test)
-    # accuracy = accuracy_score(y_test, predictions)
-    # # score = f1_score(y_test, predictions)
-    # cm = confusion_matrix(y_test, predictions)
-    # print(cm)
-    # print(accuracy*100, '%')
-    # print(score*100, '%')
